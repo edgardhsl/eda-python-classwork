@@ -1,0 +1,22 @@
+[
+    {
+        "title": "Livro didádico 1",
+        "edition": "2",
+        "min_approvals": "1"
+    },
+    {
+        "title": "Livro didádico 2",
+        "edition": "2",
+        "min_approvals": "2"
+    },
+    {
+        "title": "Livro didádico 3",
+        "edition": "2",
+        "min_approvals": "1"
+    },
+    {
+        "title": "Livro didádico 4",
+        "edition": "2",
+        "min_approvals": "2"
+    }
+]
