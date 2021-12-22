@@ -24,16 +24,46 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
-  material:
-    image: material
+  os:
+    image: os
     build: .
     depends_on:
       - kafka
+
+  material:
+    image: os
+    build: .
+    depends_on:
+      - os
     ports:
       - "5001:5000"
-    hostname: "venda"
+    hostname: "material"
     volumes:
       - "./services/material:/workdir"
+    command: python3 /workdir/app.py
+
+  revision:
+    image: os
+    build: .
+    depends_on:
+      - os
+    ports:
+      - "5002:5000"
+    hostname: "revision"
+    volumes:
+      - "./services/revision:/workdir"
+    command: python3 /workdir/app.py
+
+  validator:
+    image: os
+    build: .
+    depends_on:
+      - os
+    ports:
+      - "5003:5000"
+    hostname: "revision"
+    volumes:
+      - "./services/validator:/workdir"
     command: python3 /workdir/app.py
 
 #  estoque:

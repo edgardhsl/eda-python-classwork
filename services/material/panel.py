@@ -4,7 +4,7 @@ import json
 
 from kafka.consumer.group import KafkaConsumer
 
-painel_de_vendas = KafkaConsumer(
+material_panel = KafkaConsumer(
     bootstrap_servers = ["kafka:29092"],
     api_version = (0, 10, 1),
 
@@ -12,20 +12,20 @@ painel_de_vendas = KafkaConsumer(
     consumer_timeout_ms=1000)
 
 particao = TopicPartition("didadic_material", 0)
-painel_de_vendas.assign([particao])
+material_panel.assign([particao])
 
-painel_de_vendas.seek_to_beginning(particao)
+material_panel.seek_to_beginning(particao)
 offset = 0
 while True:
     print("Waiting for new materials...")
         
-    for pedido in painel_de_vendas:
-        offset = pedido.offset + 1
+    for material in material_panel:
+        offset = material.offset + 1
 
-        dados_do_pedido = json.loads(pedido.value)
-        print("material info: ", dados_do_pedido)
+        material_data = json.loads(material.value)
+        print("material info: ", material_data)
 
-    painel_de_vendas.seek(particao, offset)
+    material_panel.seek(particao, offset)
 
     sleep(5)
 
